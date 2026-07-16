@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: ankane/pgvector:v0.5.1
+    container_name: policy-qa-postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: policy_qa
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: policy-qa-backend
+    environment:
+      DATABASE_URL: postgresql://user:password@postgres:5432/policy_qa
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend/src:/app/src
+    command: npm run dev
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: policy-qa-frontend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./frontend/src:/app/src
+    command: npm run dev
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

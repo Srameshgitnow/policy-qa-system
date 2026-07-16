@@ -5,8 +5,6 @@ to ask questions about UK government policies and receive accurate, cited answer
 by official policy documents.
 
 **Status:** 🚀 Active Development  
-**Current Phase:** MVP (Weeks 15-20)  
-**Target:** Production-ready by Week 20
 
 ---
 

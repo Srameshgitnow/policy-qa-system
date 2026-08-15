@@ -228,5 +228,10 @@ Data is public and freely available.
 ## 📄 License
 
 MIT
+ 
+## Support
+
+If you find this project helpful, please consider starring the repository and sharing it with others.
+
 
 ---

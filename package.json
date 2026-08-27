@@ -1,7 +1,7 @@
 {
   "name": "policy-qa-system",
   "version": "0.1.0",
-  "description": "RAG system for UK government policy questions",
+  "description": "Open-source RAG application for clear, source-cited answers to UK government policy questions",
   "private": true,
   "workspaces": [
     "backend",

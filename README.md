@@ -1,5 +1,23 @@
 # Policy Q&A System
 
+[![Status: Active Development](https://img.shields.io/badge/status-active%20development-2563eb)](https://github.com/yourusername/policy-qa-system)
+
+**Ask questions about UK government policies and understand the answer in plain English.**
+Policy Q&A System is an open-source, retrieval-augmented generation (RAG) application that
+finds relevant official documents, produces a grounded answer, and displays the sources used.
+
+> ⭐ If this project helps you make public policy easier to understand, please **star the
+> repository**. Stars help other developers discover the project and guide future development.
+
+## Why this project?
+
+Government guidance is authoritative but often difficult to search and full of specialist
+language. This project combines semantic search and large language models to make UK policy
+information easier to explore without hiding where an answer came from.
+
+**Useful search terms:** UK government policy Q&A, RAG chatbot, cited AI answers, GOV.UK
+search, policy document search, public-sector AI, government information assistant.
+
 A retrieval-augmented generation (RAG) system that enables citizens and government staff 
 to ask questions about UK government policies and receive accurate, cited answers backed 
 by official policy documents.

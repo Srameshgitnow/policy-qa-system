@@ -1,6 +1,6 @@
 # SEO and discoverability guide
 
-This repository includes a crawlable HTML description, Open Graph and Twitter metadata,
+This independent repository includes a crawlable HTML description, Open Graph and Twitter metadata,
 JSON-LD structured data, a branded favicon, and a `robots.txt` file for the frontend.
 
 ## Before publishing
@@ -16,6 +16,10 @@ JSON-LD structured data, a branded favicon, and a `robots.txt` file for the fron
 ## Content guidelines
 
 - Keep answers and policy summaries accurate, dated, and linked to their official sources.
+- Clearly state that the project is independent and does not imply government endorsement,
+  sponsorship, partnership, or official status.
+- Use agency names and logos only to identify the source of a linked document, never as branding
+  or in a way that could suggest affiliation.
 - Do not promise perfect accuracy or “zero hallucinations”; explain that users should verify
   time-sensitive information against the cited GOV.UK page.
 - Add short, task-focused examples when new policy categories are indexed.

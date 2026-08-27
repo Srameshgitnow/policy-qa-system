@@ -53,7 +53,8 @@ function App() {
       <footer className="bg-gray-800 text-white mt-12">
         <div className="container py-6">
           <p className="text-center text-gray-400">
-            © {new Date().getFullYear()} Policy Q&A System. Information sourced from official UK government websites.
+            © {new Date().getFullYear()} Policy Q&A System. Independent project; sources are linked for reference.
+            Verify current information with the relevant publisher.
           </p>
         </div>
       </footer>

@@ -6,7 +6,7 @@ export const Header: React.FC = () => {
       <div className="container py-6">
         <h1 id="site-title" className="text-3xl font-bold">Policy Q&A System</h1>
         <p className="text-blue-100 mt-2">
-          Ask questions about UK government policies and get clear, source-cited answers
+          Explore public UK policy information and get clear, source-cited answers
         </p>
       </div>
     </header>

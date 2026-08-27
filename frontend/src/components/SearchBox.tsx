@@ -37,7 +37,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, isLoading = fals
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Ask a question about UK government policies..."
+            placeholder="Ask a question about public UK policy information..."
             className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             disabled={isLoading}
           />

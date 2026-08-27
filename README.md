@@ -12,7 +12,7 @@ displays the sources used.
 
 ## Why this project?
 
-Government guidance is authoritative but often difficult to search and full of specialist
+Public guidance is authoritative but often difficult to search and full of specialist
 language. This project combines semantic search and large language models to make UK policy
 information easier to explore without hiding where an answer came from.
 
@@ -27,8 +27,8 @@ agencies or websites identify information sources only; they do not imply a rela
 Always check the linked source for current requirements. This application is not legal, tax,
 health, immigration, or other professional advice.
 
-A retrieval-augmented generation (RAG) system that enables citizens and government staff 
-to ask questions about UK government policies and receive accurate, cited answers backed 
+A retrieval-augmented generation (RAG) system that helps people 
+to ask questions about UK public policy information and receive accurate, cited answers backed 
 by official policy documents.
 
 **Status:** 🚀 Active Development  
@@ -37,13 +37,13 @@ by official policy documents.
 
 ## 🎯 What It Does
 
-Users can ask questions about UK government policies, and the system:
+Users can ask questions about UK public policy information, and the system:
 
-1. **Retrieves** relevant policy documents from government sources
+1. **Retrieves** relevant policy documents from configured public sources
 2. **Reads** and understands the policy content
 3. **Generates** an accurate answer grounded in official documents
 4. **Cites** exact sources (with page/section references)
-5. **Explains** policy in plain English (not government jargon)
+5. **Explains** policy in plain English (not specialist jargon)
 
 ### Real-World Examples
 
@@ -158,7 +158,7 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxx
 # Database
 DATABASE_URL=postgresql://user:password@localhost:5432/policy_qa
 
-# Government Data Sources
+# Public Information Sources
 GOV_UK_API_TOKEN=xxxxxxxxxxxx (optional)
 
 # Server
@@ -236,7 +236,7 @@ This system can ingest publicly available information from sources such as:
 - **DWP** — Universal Credit, pension information
 - **DVLA** — Vehicle and driving information
 - **NHS** — Health and social care guidance
-- **Local Government** — Council tax, planning guidance
+- **Local authorities** — Council tax, planning guidance
 
 Availability and reuse rights vary by source. Confirm the licence, terms of use, and attribution
 requirements for each document before ingesting or redistributing it.

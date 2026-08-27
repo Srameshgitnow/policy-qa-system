@@ -12,7 +12,7 @@ export async function generateAnswer(query, retrievedChunks) {
         const sourcesContext = retrievedChunks
             .map((chunk, index) => `[Source ${index + 1}]\n${chunk.content}`)
             .join('\n\n');
-        const prompt = `You are a helpful assistant that answers questions about UK government policies.
+        const prompt = `You are a helpful assistant that answers questions about UK public policy information.
 
 User Question: ${query}
 

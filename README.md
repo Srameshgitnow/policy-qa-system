@@ -41,18 +41,6 @@ Users can ask questions about areas such as benefits, immigration procedures, pu
 - "What are the key rules around Universal Credit?"
 - "What is the difference between various public service eligibility rules?"
 
-## Public repository checklist
-
-This repository is set up to be more credible and publication-ready for a public GitHub audience:
-
-- [x] README is complete and professionally structured
-- [x] Project architecture is documented in [ARCHITECTURE.md](ARCHITECTURE.md)
-- [x] Repo hygiene and environment safety are configured in [.gitignore](.gitignore)
-- [x] License is included in [LICENSE](LICENSE)
-- [x] Clear setup and usage instructions are included below
-- [x] No hard-coded secrets or API keys are exposed in the project files
-- [ ] Live demo and screenshots can be added later when the project is ready for public showcase
-
 ## Tech stack
 
 | Layer | Stack |

@@ -1,263 +1,197 @@
 # Policy Q&A System
 
-[![Status: Active Development](https://img.shields.io/badge/status-active%20development-2563eb)](https://github.com/yourusername/policy-qa-system)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Status: Active](https://img.shields.io/badge/Status-Active%20Development-blue.svg)]()
+[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933.svg)]()
+[![React](https://img.shields.io/badge/React-18-61DAFB.svg)]()
 
-**Ask questions about public UK policy information and understand the answer in plain English.**
-Policy Q&A System is an independent, open-source retrieval-augmented generation (RAG)
-application that finds relevant publicly available documents, produces a grounded answer, and
-displays the sources used.
+A public-facing, open-source RAG application for finding and understanding UK public policy information in plain English.
 
-> ⭐ If this project helps you make public policy easier to understand, please **star the
-> repository**. Stars help other developers discover the project and guide future development.
+> ⭐ If this project helps make public information easier to understand, please star it. Public visibility and community feedback are important for growth, credibility, and future improvements.
 
-## Why this project?
+## Why this project matters
 
-Public guidance is authoritative but often difficult to search and full of specialist
-language. This project combines semantic search and large language models to make UK policy
-information easier to explore without hiding where an answer came from.
+Public policy and official guidance are often difficult to navigate because they are written for specialists and scattered across many sources. This project demonstrates how AI-assisted retrieval can help people:
 
-**Useful search terms:** UK policy Q&A, RAG chatbot, cited AI answers, public policy search,
-policy document search, civic technology, information assistant.
+- search public policy information faster
+- see the exact sources behind each answer
+- understand complex guidance in simpler language
+- explore linked documents without losing context
+
+This project is intentionally designed as a transparent, source-grounded assistant rather than a black-box answer generator.
 
 ## Independent project notice
 
-This is an independent community project. It is **not affiliated with, endorsed by, sponsored
-by, or operated by the UK Government, GOV.UK, or any public authority**. References to public
-agencies or websites identify information sources only; they do not imply a relationship.
-Always check the linked source for current requirements. This application is not legal, tax,
-health, immigration, or other professional advice.
+This is an independent community project and is not affiliated with, endorsed by, sponsored by, or operated by the UK Government, GOV.UK, or any public authority. References to public agencies or websites are only to identify information sources. Always verify the current rules, deadlines, and official guidance before making a real-world decision.
 
-A retrieval-augmented generation (RAG) system that helps people 
-to ask questions about UK public policy information and receive accurate, cited answers backed 
-by official policy documents.
+## What it does
 
-**Status:** 🚀 Active Development  
+Users can ask questions about areas such as benefits, immigration procedures, public services, healthcare guidance, and general policy questions. The system:
 
----
+1. retrieves relevant documents from configured public sources
+2. ranks the most relevant passages
+3. uses grounded prompting to answer based on those documents
+4. shows source references and supporting context
+5. presents the answer in plain English
 
-## 🎯 What It Does
+## Example use cases
 
-Users can ask questions about UK public policy information, and the system:
+- "How do I apply for Child Benefit?"
+- "What documents are required for a UK passport application?"
+- "What are the key rules around Universal Credit?"
+- "What is the difference between various public service eligibility rules?"
 
-1. **Retrieves** relevant policy documents from configured public sources
-2. **Reads** and understands the policy content
-3. **Generates** an accurate answer grounded in official documents
-4. **Cites** exact sources (with page/section references)
-5. **Explains** policy in plain English (not specialist jargon)
+## Public repository checklist
 
-### Real-World Examples
+This repository is set up to be more credible and publication-ready for a public GitHub audience:
 
-**User Question:** "How much Child Benefit do I get for two children?"
+- [x] README is complete and professionally structured
+- [x] Project architecture is documented in [ARCHITECTURE.md](ARCHITECTURE.md)
+- [x] Repo hygiene and environment safety are configured in [.gitignore](.gitignore)
+- [x] License is included in [LICENSE](LICENSE)
+- [x] Clear setup and usage instructions are included below
+- [x] No hard-coded secrets or API keys are exposed in the project files
+- [ ] Live demo and screenshots can be added later when the project is ready for public showcase
 
-**System Answer:**
-```
-You can claim Child Benefit for each child until they turn 16 (or 20 if in approved education/training).
+## Tech stack
 
-For 2 children:
-- Eldest child: £24.50/week
-- Other children: £16.30/week each
-- Total: £57.10/week (£2,969.20/year)
+| Layer | Stack |
+| --- | --- |
+| Frontend | React + TypeScript + Vite + Tailwind CSS |
+| Backend | Node.js + Express + TypeScript |
+| AI / RAG | LangChain + OpenAI embeddings and chat models |
+| Database | PostgreSQL + pgvector |
+| Infrastructure | Docker + Docker Compose |
 
-However, if your household income exceeds £50,000, you may need to pay back some benefit through self-assessment.
+## Architecture
 
-**Sources:**
-- GOV.UK: Child Benefit rates 2024-2025
-- UK Tax Rules: High Income Child Benefit Charge
-```
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the system design, request flow, and module layout.
 
-**User Question:** "What documents do I need to apply for a UK passport?"
+## Project structure
 
-**System Answer:**
-```
-You'll need:
-
-1. **Proof of identity:** One of the following:
-   - Current passport
-   - Birth certificate (full version with parents' details)
-   - UK photocard driving licence
-   - National ID card
-
-2. **Proof of residence:** Dated within last 3 months:
-   - Utility bill
-   - Council tax bill
-   - Bank statement
-
-3. **Passport photos:** 6 x 4cm, recent, in color
-
-4. **Completed form:** SP11 (standard application)
-
-See GOV.UK Passport Application for full details and costs.
-
-**Sources:**
-- DVLA/Passport Office: Official UK Passport Requirements
-- GOV.UK: How to Apply for a Passport
+```text
+policy-qa-system/
+├── README.md
+├── ARCHITECTURE.md
+├── LICENSE
+├── .gitignore
+├── docker-compose.yml
+├── backend/
+│   ├── src/
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── .env.example
+├── frontend/
+│   ├── src/
+│   ├── package.json
+│   └── vite.config.ts
+└── SEO.md
 ```
 
----
-
-## ✨ Key Features
-
-- ✅ **RAG (Retrieval-Augmented Generation)** — Answers backed by official documents
-- ✅ **Grounded responses** — Answers are based on retrieved policy documents
-- ✅ **Citation Engine** — Every answer includes source references
-- ✅ **Plain English Translation** — Complex policy → clear language
-- ✅ **Multi-Source Support** — Supports multiple public policy sources
-- ✅ **Search Fallback** — If RAG doesn't have answer, suggests related policies
-- ✅ **Confidence Scoring** — Shows how confident the system is in its answer
-- ✅ **Analytics** — Track which questions are most asked
-- ✅ **Scalable** — Supports hundreds of concurrent users
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| **Frontend** | React 18 + TypeScript + TailwindCSS |
-| **Backend** | Node.js 18+ + Express.js + Hapi.js |
-| **AI/RAG** | LangChain + LangGraph + OpenAI/Claude |
-| **Vector Store** | PostgreSQL + pgvector (embeddings) |
-| **Data Source** | Public policy APIs, parliamentary material, and documents |
-| **Authentication** | Optional (public or authenticated access) |
-| **Deployment** | Docker + Railway/Render |
-| **Analytics** | PostgreSQL + Grafana (optional) |
-
----
-
-## 🚀 Quick Start
+## Quick start
 
 ### Prerequisites
-- Node.js 18+
-- PostgreSQL 13+ with pgvector extension
-- OpenAI API key (or Claude API key)
-- Optional: GitHub account for PDF scraping
 
-### Installation
+- Node.js 18 or newer
+- npm
+- PostgreSQL with pgvector support
+- An OpenAI API key for embeddings/chat generation
 
-1. **Clone the repo**
+### 1) Clone the repository
+
 ```bash
-git clone https://github.com/yourusername/policy-qa-system.git
+git clone https://github.com/<your-username>/policy-qa-system.git
 cd policy-qa-system
 ```
 
-2. **Install dependencies**
+### 2) Install dependencies
+
 ```bash
 npm install
 ```
 
-3. **Set up environment variables**
+### 3) Configure environment variables
+
+Copy the backend sample environment file:
+
 ```bash
-cp .env.example .env
+cp backend/.env.example backend/.env
 ```
 
-Edit `.env`:
-```
-# OpenAI
-OPENAI_API_KEY=sk-xxxxxxxxxxxx
+Then update the values in backend/.env with your own local configuration.
 
-# Database
-DATABASE_URL=postgresql://user:password@localhost:5432/policy_qa
+Example:
 
-# Public Information Sources
-GOV_UK_API_TOKEN=xxxxxxxxxxxx (optional)
-
-# Server
-PORT=3000
+```env
 NODE_ENV=development
+PORT=3000
+OPENAI_API_KEY=your_openai_key_here
+DATABASE_URL=postgresql://user:password@localhost:5432/policy_qa
 ```
 
-4. **Set up database**
-```bash
-npm run db:migrate
-npm run seed:policies  # Load initial policy documents
-```
+### 4) Start local services
 
-5. **Start the server**
 ```bash
+docker compose up -d postgres
 npm run dev
 ```
 
-Server runs on `http://localhost:3000`
+The frontend and backend should start in local development mode.
 
----
+### 5) Seed or ingest content
 
-## 📖 Usage
-
-### For End Users
-
-Visit `http://localhost:3000` and ask a question:
-
-```
-"How do I apply for universal credit?"
-```
-
-System responds with:
-- Clear answer in plain English
-- Source citations with links
-- Related policies you might find helpful
-- Confidence score
-
-### For Administrators
-
-Add new policy documents:
 ```bash
-npm run ingest:documents --source="gov.uk" --category="benefits"
+npm run seed:policies
 ```
 
-View analytics:
+If you want to ingest data into the retrieval layer:
+
 ```bash
-GET /api/analytics
+npm run ingest:documents
 ```
 
-View all indexed policies:
-```bash
-GET /api/policies
+## Usage
+
+Open the frontend in your browser and ask questions such as:
+
+```text
+How do I apply for Universal Credit?
+What documents do I need for a passport?
+What support is available for families?
 ```
 
----
+The app should return a grounded answer with citations and related source references.
 
-## 📊 Expected Results
+## Open-source quality and public visibility
 
-- **Response Time:** 2-5 seconds per question
-- **Accuracy:** 90%+ when answer exists in policy documents
-- **Hallucination Rate:** <5% (RAG prevents making up answers)
-- **User Satisfaction:** 85%+ (based on feedback)
-- **Cost:** ~$0.10-0.30 per question (varies by LLM)
+To make the repository stronger for public viewing and GitHub discovery:
 
----
+- keep the README focused, concise, and readable
+- document the architecture clearly
+- use a proper MIT license
+- avoid secrets and environment files in the repo
+- maintain a low-friction setup experience
+- add a roadmap and future improvements section over time
+- publish a clean, well-structured issue and PR flow
 
-## 📚 Public Information Sources
+## Contributing
 
-This system can ingest publicly available information from sources such as:
+Contributions are welcome. Whether you are improving the retrieval flow, frontend UX, documentation, or ingestion pipeline, please keep the changes focused and clearly explained.
 
-- **GOV.UK** — Benefits, taxes, passports, driving licenses
-- **UK Parliament** — Bills, acts, debates
-- **HMRC** — Tax guidance, self-assessment
-- **DWP** — Universal Credit, pension information
-- **DVLA** — Vehicle and driving information
-- **NHS** — Health and social care guidance
-- **Local authorities** — Council tax, planning guidance
+## License
 
-Availability and reuse rights vary by source. Confirm the licence, terms of use, and attribution
-requirements for each document before ingesting or redistributing it.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
----
+## Security
 
-## 🔒 Privacy & Compliance
+Do not commit real API keys, database credentials, or private tokens. Use local environment files only and keep them out of version control. If you discover a security issue, please report it privately before opening a public issue.
 
-- ✅ No user data stored (unless explicitly opted in)
-- ✅ No training on user questions
-- ✅ GDPR compliant (personal data not processed)
-- ✅ Read-only access to configured public sources
-- ✅ All processing local (no external API calls except LLM)
+## Star this project
 
----
+This repository is built to be a professional, public-facing project that can be shown to recruiters, collaborators, and visa reviewers. A clean README, architecture docs, and open-source hygiene all help signal seriousness.
 
-## 📄 License
+If this project is useful, a GitHub star is a small but meaningful signal of support.
 
-MIT
- 
-## Support
 
 If you find this project helpful, please consider starring the repository and sharing it with others.
 

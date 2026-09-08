@@ -173,18 +173,7 @@ To make the repository stronger for public viewing and GitHub discovery:
 - add a roadmap and future improvements section over time
 - publish a clean, well-structured issue and PR flow
 
-## Release checklist (current repo status)
 
-- [x] Add `LICENSE` (MIT)
-- [x] Add `ARCHITECTURE.md`
-- [x] Improve `.gitignore` and remove tracked secrets
-- [x] Docker Compose setup for local dev (frontend, backend, postgres)
-- [x] Keyword-search fallback when embeddings are unavailable
-- [x] Vite proxy fixed for container networking
-- [x] UI screenshots added to `docs/images` and referenced in README
-- [ ] Optional: Add non-OpenAI embedding provider (Hugging Face / local) for full Claude-only RAG
-- [ ] Optional: Remove placeholder `OPENAI_API_KEY` from `backend/.env` before publishing
-- [ ] Optional: Capture a high-resolution hero screenshot and add alt text / captions
 
 ## Contributing
 

@@ -51,6 +51,16 @@ Users can ask questions about areas such as benefits, immigration procedures, pu
 | Database | PostgreSQL + pgvector |
 | Infrastructure | Docker + Docker Compose |
 
+## Application preview
+
+Application screenshots (local running UI):
+
+![App demo main view](docs/images/app-demo.png)
+![Ask a question demo](docs/images/app-ask-question-demo.png)
+![Browse policies demo](docs/images/app-browse-policy-demo.png)
+![Browse policies demo 2](docs/images/app-browse-policy-demo1.png)
+![Browse policies demo 3](docs/images/app-browse-policy-demo2.png)
+
 ## Architecture
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the system design, request flow, and module layout.
@@ -80,10 +90,11 @@ policy-qa-system/
 
 ### Prerequisites
 
-- Node.js 18 or newer
+- Node.js 18 or newer (for local dev)
 - npm
-- PostgreSQL with pgvector support
-- An OpenAI API key for embeddings/chat generation
+- PostgreSQL with pgvector support (or use the bundled Postgres in Docker Compose)
+- Claude API key (`CLAUDE_API_KEY`) for LLM answer generation — required for RAG generation in this repo
+- OpenAI API key (`OPENAI_API_KEY`) only if you want OpenAI embeddings (optional). If omitted, the server will use a keyword/full-text fallback for retrieval.
 
 ### 1) Clone the repository
 
@@ -161,6 +172,19 @@ To make the repository stronger for public viewing and GitHub discovery:
 - maintain a low-friction setup experience
 - add a roadmap and future improvements section over time
 - publish a clean, well-structured issue and PR flow
+
+## Release checklist (current repo status)
+
+- [x] Add `LICENSE` (MIT)
+- [x] Add `ARCHITECTURE.md`
+- [x] Improve `.gitignore` and remove tracked secrets
+- [x] Docker Compose setup for local dev (frontend, backend, postgres)
+- [x] Keyword-search fallback when embeddings are unavailable
+- [x] Vite proxy fixed for container networking
+- [x] UI screenshots added to `docs/images` and referenced in README
+- [ ] Optional: Add non-OpenAI embedding provider (Hugging Face / local) for full Claude-only RAG
+- [ ] Optional: Remove placeholder `OPENAI_API_KEY` from `backend/.env` before publishing
+- [ ] Optional: Capture a high-resolution hero screenshot and add alt text / captions
 
 ## Contributing
 

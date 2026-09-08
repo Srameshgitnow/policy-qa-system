@@ -1,12 +1,30 @@
 import { OpenAIEmbeddings } from '@langchain/openai';
 import dotenv from 'dotenv';
+import fs from 'node:fs';
+import path from 'node:path';
 import { logger } from '../../utils/logger.js';
 
-dotenv.config();
+const envCandidates = [
+  path.resolve(process.cwd(), '.env'),
+  path.resolve(process.cwd(), 'backend/.env'),
+  path.resolve(process.cwd(), '../backend/.env'),
+  path.resolve(process.cwd(), '../../backend/.env')
+];
+
+const envFile = envCandidates.find((candidate) => fs.existsSync(candidate));
+if (envFile) {
+  dotenv.config({ path: envFile });
+} else {
+  dotenv.config();
+}
 
 let embeddingsInstance: OpenAIEmbeddings | null = null;
 
 export async function getEmbeddingsInstance(): Promise<OpenAIEmbeddings> {
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error('OPENAI_API_KEY is required for vector embeddings. Set it in backend/.env.');
+  }
+
   if (!embeddingsInstance) {
     embeddingsInstance = new OpenAIEmbeddings({
       openAIApiKey: process.env.OPENAI_API_KEY,

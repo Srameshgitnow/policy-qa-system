@@ -24,7 +24,22 @@ questionsRouter.post('/', async (req: Request<{}, {}, QuestionRequest>, res: Res
     logger.info(`Processing question: ${userQuery}`);
 
     // Generate embedding for the user's question
-    const embedding = await generateEmbedding(userQuery);
+    let embedding: number[] | null = null;
+    try {
+      embedding = await generateEmbedding(userQuery);
+    } catch (embedErr) {
+      logger.warn('Embedding generation failed, falling back to keyword search', embedErr);
+      const relatedPolicies = await searchPoliciesByKeyword(userQuery);
+      return res.json({
+        id: null,
+        query: userQuery,
+        answer: 'I could not generate embeddings (external API key may be invalid). Here are related policies you might find helpful:',
+        confidence: 0,
+        sources: [],
+        relatedPolicies: relatedPolicies.map((p: any) => p.title),
+        createdAt: new Date().toISOString()
+      });
+    }
 
     // Retrieve relevant policy chunks
     const retrievedChunks = await retrieveRelevantChunks(embedding, 5);
@@ -36,15 +51,33 @@ questionsRouter.post('/', async (req: Request<{}, {}, QuestionRequest>, res: Res
       const relatedPolicies = await searchPoliciesByKeyword(userQuery);
       
       return res.json({
+        id: null,
+        query: userQuery,
         answer: 'I could not find a direct answer to your question in our policy database. Here are some related policies you might find helpful:',
         confidence: 0,
         sources: [],
-        relatedPolicies: relatedPolicies.map((p: any) => p.title)
+        relatedPolicies: relatedPolicies.map((p: any) => p.title),
+        createdAt: new Date().toISOString()
       });
     }
 
     // Generate answer from retrieved chunks
-    const generatedAnswer = await generateAnswer(userQuery, retrievedChunks);
+    let generatedAnswer;
+    try {
+      generatedAnswer = await generateAnswer(userQuery, retrievedChunks);
+    } catch (genErr) {
+      logger.warn('LLM generation failed, returning related policies as fallback', genErr);
+      const relatedPolicies = await searchPoliciesByKeyword(userQuery);
+      return res.json({
+        id: null,
+        query: userQuery,
+        answer: 'I could not generate a grounded answer (LLM call failed). Here are related policies you might find helpful:',
+        confidence: 0,
+        sources: [],
+        relatedPolicies: relatedPolicies.map((p: any) => p.title),
+        createdAt: new Date().toISOString()
+      });
+    }
 
     // Store question and answer in database
     const sourceIds = retrievedChunks.map(chunk => chunk.policyId);

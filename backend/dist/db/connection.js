@@ -1,7 +1,21 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
+import fs from 'node:fs';
+import path from 'node:path';
 import { logger } from '../utils/logger.js';
-dotenv.config();
+const envCandidates = [
+    path.resolve(process.cwd(), '.env'),
+    path.resolve(process.cwd(), 'backend/.env'),
+    path.resolve(process.cwd(), '../backend/.env'),
+    path.resolve(process.cwd(), '../../backend/.env')
+];
+const envFile = envCandidates.find((candidate) => fs.existsSync(candidate));
+if (envFile) {
+    dotenv.config({ path: envFile });
+}
+else {
+    dotenv.config();
+}
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     host: process.env.DATABASE_HOST || 'localhost',

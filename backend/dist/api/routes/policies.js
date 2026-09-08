@@ -38,6 +38,18 @@ policiesRouter.get('/', async (req, res) => {
         return res.status(500).json({ error: 'Failed to list policies' });
     }
 });
+// GET /api/policies/categories - List unique categories
+policiesRouter.get('/categories/list', async (req, res) => {
+    try {
+        const result = await query(`SELECT DISTINCT category, COUNT(*) as count FROM policies 
+       GROUP BY category ORDER BY count DESC`);
+        return res.json(result.rows);
+    }
+    catch (error) {
+        logger.error('Error listing categories:', error);
+        return res.status(500).json({ error: 'Failed to list categories' });
+    }
+});
 // GET /api/policies/:id - Get a specific policy
 policiesRouter.get('/:id', async (req, res) => {
     try {
@@ -51,18 +63,6 @@ policiesRouter.get('/:id', async (req, res) => {
     catch (error) {
         logger.error('Error fetching policy:', error);
         return res.status(500).json({ error: 'Failed to fetch policy' });
-    }
-});
-// GET /api/policies/categories - List unique categories
-policiesRouter.get('/categories/list', async (req, res) => {
-    try {
-        const result = await query(`SELECT DISTINCT category, COUNT(*) as count FROM policies 
-       GROUP BY category ORDER BY count DESC`);
-        return res.json(result.rows);
-    }
-    catch (error) {
-        logger.error('Error listing categories:', error);
-        return res.status(500).json({ error: 'Failed to list categories' });
     }
 });
 //# sourceMappingURL=policies.js.map

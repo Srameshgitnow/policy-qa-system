@@ -1,14 +1,42 @@
 import { ChatOpenAI } from '@langchain/openai';
+import { ChatAnthropic } from '@langchain/anthropic';
 import dotenv from 'dotenv';
+import fs from 'node:fs';
+import path from 'node:path';
 import { logger } from '../../utils/logger.js';
-dotenv.config();
-export async function generateAnswer(query, retrievedChunks) {
-    try {
-        const llm = new ChatOpenAI({
+const envCandidates = [
+    path.resolve(process.cwd(), '.env'),
+    path.resolve(process.cwd(), 'backend/.env'),
+    path.resolve(process.cwd(), '../backend/.env'),
+    path.resolve(process.cwd(), '../../backend/.env')
+];
+const envFile = envCandidates.find((candidate) => fs.existsSync(candidate));
+if (envFile) {
+    dotenv.config({ path: envFile });
+}
+else {
+    dotenv.config();
+}
+function getChatModel() {
+    if (process.env.CLAUDE_API_KEY) {
+        return new ChatAnthropic({
+            anthropicApiKey: process.env.CLAUDE_API_KEY,
+            model: 'claude-3-5-sonnet-20241022',
+            temperature: 0.7
+        });
+    }
+    if (process.env.OPENAI_API_KEY) {
+        return new ChatOpenAI({
             openAIApiKey: process.env.OPENAI_API_KEY,
             modelName: 'gpt-4',
             temperature: 0.7
         });
+    }
+    throw new Error('No AI API key configured. Set OPENAI_API_KEY or CLAUDE_API_KEY in backend/.env.');
+}
+export async function generateAnswer(query, retrievedChunks) {
+    try {
+        const llm = getChatModel();
         const sourcesContext = retrievedChunks
             .map((chunk, index) => `[Source ${index + 1}]\n${chunk.content}`)
             .join('\n\n');
@@ -63,11 +91,7 @@ Format your response as JSON with this structure:
 }
 export async function generateSummary(text, maxLength = 150) {
     try {
-        const llm = new ChatOpenAI({
-            openAIApiKey: process.env.OPENAI_API_KEY,
-            modelName: 'gpt-4',
-            temperature: 0.5
-        });
+        const llm = getChatModel();
         const prompt = `Summarize this text in plain English in approximately ${maxLength} characters:\n\n${text}`;
         const message = await llm.invoke(prompt);
         return message.content;

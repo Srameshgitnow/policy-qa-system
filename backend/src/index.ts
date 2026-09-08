@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import fs from 'node:fs';
+import path from 'node:path';
 import { questionsRouter } from './api/routes/questions.js';
 import { policiesRouter } from './api/routes/policies.js';
 import { feedbackRouter } from './api/routes/feedback.js';
@@ -8,7 +10,19 @@ import { analyticsRouter } from './api/routes/analytics.js';
 import { initializeDatabase } from './db/connection.js';
 import { logger } from './utils/logger.js';
 
-dotenv.config();
+const envCandidates = [
+  path.resolve(process.cwd(), '.env'),
+  path.resolve(process.cwd(), 'backend/.env'),
+  path.resolve(process.cwd(), '../backend/.env'),
+  path.resolve(process.cwd(), '../../backend/.env')
+];
+
+const envFile = envCandidates.find((candidate) => fs.existsSync(candidate));
+if (envFile) {
+  dotenv.config({ path: envFile });
+} else {
+  dotenv.config();
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
